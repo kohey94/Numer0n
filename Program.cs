@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Numer0n
@@ -19,31 +20,37 @@ namespace Numer0n
 
             Console.WriteLine("Numer0n Start!!");
 
+            var PlayerHistoryList = new List<InputNumberHistoryModel>();
+            var c = 0;
             while (true)
             {
-                Console.WriteLine($"{player1Name}のターン");
+                c++;
+                // Console.WriteLine($"{player1Name}のターン");
                 var inputNumber = InputEnemyNumber(player1Name);
                 (int placeNumberHit, int numberHit) = Judgment(inputNumber, enemyData);
-                Console.WriteLine($"場所も数字も当たり:{placeNumberHit}　数字が当たり:{numberHit}");
+                PlayerHistoryList.Add(new InputNumberHistoryModel(c, inputNumber, placeNumberHit, numberHit));
+
+                DisplayInputNumberHistory(PlayerHistoryList);
                 if (placeNumberHit == 4)
                 {
                     Console.WriteLine($"対戦相手の数字は{new string(inputNumber)}でした。");
                     Console.WriteLine($"{player1Name}が勝ちました。");
                     break;
                 }
-
-                Console.WriteLine($"対戦相手のターン");
-                var inputNumber2 = GenerateRandomData();
-                Console.WriteLine($"対戦相手の入力値:{new string(inputNumber2)}");
-                (int placeNumberHit2, int numberHit2) = Judgment(inputNumber2, player1Data);
-                Console.WriteLine($"場所も数字も当たり:{placeNumberHit2}　数字が当たり:{numberHit2}");
-                if (placeNumberHit2 == 4)
-                {
-                    Console.WriteLine($"{player1Name}の数字は{new string(inputNumber2)}でした。");
-                    Console.WriteLine($"対戦相手が勝ちました。");
-                    break;
-                }
             }
+        }
+
+        static void DisplayInputNumberHistory(List<InputNumberHistoryModel> historyList)
+        {
+            Console.WriteLine($"+-----------------------------------------------+");
+            Console.WriteLine($"| 回数| 入力値| 場所も数字も当たり| 数字が当たり|");
+            Console.WriteLine($"|-----------------------------------------------|");
+            foreach (var history in historyList)
+            {
+                Console.WriteLine($"|  {String.Format("{0,3}", history.Count)}|   {new string(history.InputNumber)}|                  {history.PlaceNumberHit}|            {history.NumberHit}|");
+            }
+            Console.WriteLine($"+-----------------------------------------------+");
+
         }
 
         static char[] SetPlayersData(string currentPlayer)
