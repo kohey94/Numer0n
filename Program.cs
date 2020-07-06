@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace Numer0n
 {
@@ -14,9 +15,6 @@ namespace Numer0n
 
             var enemyData = GenerateRandomData();
             //Console.WriteLine($"チートだよ 対戦相手の数字:{new string(enemyData)}");
-
-
-            char[] player1Data = SetPlayersData(player1Name);
 
             Console.WriteLine("Numer0n Start!!");
 
@@ -59,11 +57,10 @@ namespace Numer0n
             {
                 Console.Write($"{currentPlayer}、数字を重複なしの4桁で入力してください。:");
                 var p1Input = Console.ReadLine();
-                if (p1Input.Length == 4 && 
-                    Int32.TryParse(p1Input, out int num) && 
-                    num.ToString().ToCharArray().Distinct().Count() == 4)
+                if (Regex.IsMatch(p1Input, "^\\d{4}$") &&
+                    p1Input.ToString().ToCharArray().Distinct().Count() == 4)
                 {
-                    return num.ToString().ToCharArray();
+                    return p1Input.ToString().ToCharArray();
                 }
                 else
                 {
@@ -78,11 +75,10 @@ namespace Numer0n
             {
                 Console.Write($"{currentPlayer}, 対戦相手の数字を重複なしの4桁で入力してください。:");
                 var p1Input = Console.ReadLine();
-                if (p1Input.Length == 4 && 
-                    Int32.TryParse(p1Input, out int num) && 
-                    num.ToString().ToCharArray().Distinct().Count() == 4)
+                if (Regex.IsMatch(p1Input, "^\\d{4}$") &&
+                    p1Input.ToString().ToCharArray().Distinct().Count() == 4)
                 {
-                    return num.ToString().ToCharArray();
+                    return p1Input.ToString().ToCharArray();
                 }
                 else
                 {
