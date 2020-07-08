@@ -1,6 +1,37 @@
 ﻿@page "/numeron"
- 
+
 <h3>Numer0n</h3>
+
+<Table Bordered="true" Hoverable="true">
+    <TableHeader ThemeContrast="ThemeContrast.Dark">
+        <TableRow>
+            <TableHeaderCell>回</TableHeaderCell>
+            <TableHeaderCell>入力値</TableHeaderCell>
+            <TableHeaderCell>場所も数字も当たり</TableHeaderCell>
+            <TableHeaderCell>数字が当たり</TableHeaderCell>
+        </TableRow>
+    </TableHeader>
+    <TableBody>
+        <TableRow>
+            <TableRowHeader>1</TableRowHeader>
+            <TableRowCell>1234</TableRowCell>
+            <TableRowCell>0</TableRowCell>
+            <TableRowCell>1</TableRowCell>
+        </TableRow>
+        <TableRow>
+            <TableRowHeader>2</TableRowHeader>
+            <TableRowCell>2345</TableRowCell>
+            <TableRowCell>1</TableRowCell>
+            <TableRowCell>1</TableRowCell>
+        </TableRow>
+        <TableRow>
+            <TableRowHeader>3</TableRowHeader>
+            <TableRowCell>2534</TableRowCell>
+            <TableRowCell>2</TableRowCell>
+            <TableRowCell>0</TableRowCell>
+        </TableRow>
+    </TableBody>
+</Table>
 
 @code {
 
