@@ -4,10 +4,10 @@
 
 <Addons>
     <Addon AddonType="AddonType.Body">
-        <TextEdit Placeholder="Recipient's username" />
+        <TextEdit Placeholder="何か入力" @bind-Text="input"/>
     </Addon>
     <Addon AddonType="AddonType.End">
-        <Button Color="Color.Secondary">Button</Button>
+        <Button Color="Color.Secondary" @onclick="SetList">Button</Button>
     </Addon>
 </Addons>
 <br />
@@ -22,27 +22,46 @@
         </TableRow>
     </TableHeader>
     <TableBody>
-        <TableRow>
-            <TableRowHeader>1</TableRowHeader>
-            <TableRowCell>1234</TableRowCell>
-            <TableRowCell>0</TableRowCell>
-            <TableRowCell>1</TableRowCell>
-        </TableRow>
-        <TableRow>
-            <TableRowHeader>2</TableRowHeader>
-            <TableRowCell>2345</TableRowCell>
-            <TableRowCell>1</TableRowCell>
-            <TableRowCell>1</TableRowCell>
-        </TableRow>
-        <TableRow>
-            <TableRowHeader>3</TableRowHeader>
-            <TableRowCell>2534</TableRowCell>
-            <TableRowCell>2</TableRowCell>
-            <TableRowCell>0</TableRowCell>
-        </TableRow>
+        @foreach (var d in inputList)
+        {
+            <TableRow>
+                <TableRowHeader>@d.Number</TableRowHeader>
+                <TableRowCell>@d.Data</TableRowCell>
+                <TableRowCell>0</TableRowCell>
+                <TableRowCell>0</TableRowCell>
+            </TableRow>
+
+        }
     </TableBody>
 </Table>
 
 @code {
+    private string input = "";
+    protected class InputData
+    {
+        public InputData(int number, string data)
+        {
+            Number = number;
+            Data = data;
+        }
+        public int Number { get; set; }
+        public string Data { get; set; }
+    }
+
+    private List<InputData> inputList = new List<InputData>();
+
+    protected void SetList()
+    {
+        var id = new InputData(
+            inputList.Count + 1,
+            input);
+
+        inputList.Add(id);
+    }
+
+    protected List<InputData> ShowList()
+    {
+        return inputList;
+    }
 
 }
