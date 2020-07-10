@@ -1,6 +1,10 @@
 ﻿@page "/numeron"
 
+
+
 <h3>Numer0n</h3>
+
+<p>@number</p><Button @onclick="GetData">ボタン</Button>
 
 <Addons>
     <Addon AddonType="AddonType.Body">
@@ -63,5 +67,30 @@
     {
         return inputList;
     }
+
+
+    string number = string.Empty;
+    static string GenerateRandomData()
+    {
+        var rnd = new Random();
+        while (true)
+        {
+            char[] randomData = {
+                    Convert.ToChar(rnd.Next(10).ToString()),
+                    Convert.ToChar(rnd.Next(10).ToString()),
+                    Convert.ToChar(rnd.Next(10).ToString()),
+                    Convert.ToChar(rnd.Next(10).ToString())
+                };
+            if (randomData.Distinct().Count() == 4)
+            {
+                return new string(randomData);
+            }
+        }
+    }
+    protected void GetData()
+    {
+        number = GenerateRandomData();
+    }
+
 
 }
