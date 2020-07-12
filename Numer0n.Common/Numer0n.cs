@@ -1,14 +1,11 @@
 ﻿using System;
 using System.Linq;
 
-/// <summary>
-/// Numer0nのロジックを書いていく予定
-/// </summary>
-namespace Numer0n
+namespace Numer0n.Common
 {
-    static class Numer0n
+    public static class Numer0n
     {
-        static string GenerateRandomData()
+        public static string GenerateRandomData()
         {
             var rnd = new Random();
             while (true)

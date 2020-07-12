@@ -1,6 +1,6 @@
 ﻿@page "/numeron"
 
-
+@using Numer0n.Common;
 
 <h3>Numer0n</h3>
 
@@ -70,27 +70,9 @@
 
 
     string number = string.Empty;
-    static string GenerateRandomData()
-    {
-        var rnd = new Random();
-        while (true)
-        {
-            char[] randomData = {
-                    Convert.ToChar(rnd.Next(10).ToString()),
-                    Convert.ToChar(rnd.Next(10).ToString()),
-                    Convert.ToChar(rnd.Next(10).ToString()),
-                    Convert.ToChar(rnd.Next(10).ToString())
-                };
-            if (randomData.Distinct().Count() == 4)
-            {
-                return new string(randomData);
-            }
-        }
-    }
+    
     protected void GetData()
     {
-        number = GenerateRandomData();
+        number = Numer0n.GenerateRandomData();
     }
-
-
 }
