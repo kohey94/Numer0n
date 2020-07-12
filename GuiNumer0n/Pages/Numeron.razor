@@ -4,7 +4,17 @@
 
 <h3>Numer0n</h3>
 
-<p>@number</p><Button @onclick="GetData">ボタン</Button>
+@if (@number == string.Empty)
+{
+    <p>no data</p> 
+}
+else
+{
+    <p>@number</p>
+}
+
+
+<Button Color="Color.Danger" @onclick="GetData">ボタン</Button>
 
 <Addons>
     <Addon AddonType="AddonType.Body">
@@ -29,8 +39,8 @@
         @foreach (var d in inputList)
         {
             <TableRow>
-                <TableRowHeader>@d.Number</TableRowHeader>
-                <TableRowCell>@d.Data</TableRowCell>
+                <TableRowHeader>@d.Count</TableRowHeader>
+                <TableRowCell>@d.InputNumber</TableRowCell>
                 <TableRowCell>0</TableRowCell>
                 <TableRowCell>0</TableRowCell>
             </TableRow>
@@ -41,38 +51,30 @@
 
 @code {
     private string input = "";
-    protected class InputData
-    {
-        public InputData(int number, string data)
-        {
-            Number = number;
-            Data = data;
-        }
-        public int Number { get; set; }
-        public string Data { get; set; }
-    }
 
-    private List<InputData> inputList = new List<InputData>();
+    private List<InputNumberHistoryModel> inputList = new List<InputNumberHistoryModel>();
 
     protected void SetList()
     {
-        var id = new InputData(
-            inputList.Count + 1,
-            input);
+        var id = new InputNumberHistoryModel(
+            input,
+            0,
+            0);
 
         inputList.Add(id);
     }
 
-    protected List<InputData> ShowList()
+    protected List<InputNumberHistoryModel> ShowList()
     {
         return inputList;
     }
-
 
     string number = string.Empty;
     
     protected void GetData()
     {
+        
+        inputList.Clear();
         number = Numer0n.GenerateRandomData();
     }
 }
