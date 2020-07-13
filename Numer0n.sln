@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GuiNumer0n", "GuiNumer0n\Gu
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Numer0n", "Numer0n\Numer0n.csproj", "{6EF86E33-B71B-4056-9C54-A34D5AF72F4D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Numer0n.Common", "Numer0n.Common\Numer0n.Common.csproj", "{36798EBE-5454-4DF0-8F95-6B578858BF56}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Numer0n.Common", "Numer0n.Common\Numer0n.Common.csproj", "{36798EBE-5454-4DF0-8F95-6B578858BF56}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

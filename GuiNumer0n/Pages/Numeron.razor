@@ -4,28 +4,29 @@
 
 <h3>Numer0n</h3>
 
-@if (@number == string.Empty)
+@if (@answerNumber == string.Empty)
 {
-    <p>no data</p> 
+    <p>no data</p>
+    <Button Color="Color.Danger" @onclick="GetData">スタート</Button>
+
 }
 else
 {
-    <p>@number</p>
+    <p>@answerNumber</p>
+    <Addons>
+        <Addon AddonType="AddonType.Body">
+            <TextEdit Placeholder="何か入力" @bind-Text="input" />
+        </Addon>
+        <Addon AddonType="AddonType.End">
+            <Button Color="Color.Secondary" @onclick="@(e => SetList(input))">Button</Button>
+        </Addon>
+    </Addons>
+
 }
 
 
-<Button Color="Color.Danger" @onclick="GetData">ボタン</Button>
 
-<Addons>
-    <Addon AddonType="AddonType.Body">
-        <TextEdit Placeholder="何か入力" @bind-Text="input"/>
-    </Addon>
-    <Addon AddonType="AddonType.End">
-        <Button Color="Color.Secondary" @onclick="SetList">Button</Button>
-    </Addon>
-</Addons>
 <br />
-
 <Table Bordered="true" Hoverable="true">
     <TableHeader ThemeContrast="ThemeContrast.Dark">
         <TableRow>
@@ -41,27 +42,60 @@ else
             <TableRow>
                 <TableRowHeader>@d.Count</TableRowHeader>
                 <TableRowCell>@d.InputNumber</TableRowCell>
-                <TableRowCell>0</TableRowCell>
-                <TableRowCell>0</TableRowCell>
+                <TableRowCell>@d.PlaceNumberHit</TableRowCell>
+                <TableRowCell>@d.NumberHit</TableRowCell>
             </TableRow>
 
         }
     </TableBody>
 </Table>
 
+
+<Modal @ref="modalRef">
+    <ModalBackdrop />
+    <ModalContent Size="ModalSize.Default">
+        <ModalHeader>
+            <ModalTitle>結果</ModalTitle>
+        </ModalHeader>
+        <ModalBody>
+            <Label>@inputList.Count 回目で当たりました。 </Label>
+        </ModalBody>
+        <ModalFooter>
+            <Button Color="Color.Secondary" Clicked="@HideModal">閉じる</Button>
+        </ModalFooter>
+    </ModalContent>
+</Modal>
+
 @code {
+    public Modal modalRef;
+
+    private void ShowModal()
+    {
+
+        modalRef.Show();
+        answerNumber = string.Empty;
+    }
+
+    private void HideModal()
+    {
+        modalRef.Hide();
+    }
+
     private string input = "";
 
     private List<InputNumberHistoryModel> inputList = new List<InputNumberHistoryModel>();
 
-    protected void SetList()
+    protected void SetList(string inputValue)
     {
+        (int placeNumberHit, int numberHit) = Numer0n.Judgment(inputValue.ToCharArray(), answerNumber.ToCharArray());
+
         var id = new InputNumberHistoryModel(
-            input,
-            0,
-            0);
+            inputValue,
+            placeNumberHit,
+            numberHit);
 
         inputList.Add(id);
+        if (placeNumberHit == 4) ShowModal();
     }
 
     protected List<InputNumberHistoryModel> ShowList()
@@ -69,12 +103,12 @@ else
         return inputList;
     }
 
-    string number = string.Empty;
-    
+    string answerNumber = string.Empty;
+
     protected void GetData()
     {
-        
+        InputNumberHistoryModel.ClearCount();
         inputList.Clear();
-        number = Numer0n.GenerateRandomData();
+        answerNumber = Numer0n.GenerateRandomData();
     }
 }

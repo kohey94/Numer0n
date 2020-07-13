@@ -2,6 +2,7 @@
 {
     public class InputNumberHistoryModel
     {
+
         public InputNumberHistoryModel(
             string inputNumber,
             int placeNumberHit,
@@ -21,7 +22,7 @@
         public int PlaceNumberHit { get; private set; }
         public int NumberHit { get; private set; }
 
-        public void ClearCount()
+        public static void ClearCount()
         {
             TotalCount = 0;
         }
