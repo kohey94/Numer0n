@@ -28,10 +28,6 @@ namespace GuiNumer0n
             });
             builder.RootComponents.Add<App>("app");
 
-            builder.Services.AddTransient(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
-
-            await builder.Build().RunAsync();
-
             var host = builder.Build();
 
             host.Services

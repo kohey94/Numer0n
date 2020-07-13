@@ -53,11 +53,11 @@ else
 
 <Modal @ref="modalRef">
     <ModalBackdrop />
-    <ModalContent Size="ModalSize.Default">
+    <ModalContent Size="@modalSize" Centered="@centered">
         <ModalHeader>
             <ModalTitle>結果</ModalTitle>
         </ModalHeader>
-        <ModalBody>
+        <ModalBody MaxHeight="@maxHeight">
             <Label>@inputList.Count 回目で当たりました。 </Label>
         </ModalBody>
         <ModalFooter>
@@ -67,7 +67,10 @@ else
 </Modal>
 
 @code {
-    public Modal modalRef;
+    private Modal modalRef;
+    private bool centered = true;
+    private ModalSize modalSize = ModalSize.Small;
+    private int? maxHeight = null;
 
     private void ShowModal()
     {
