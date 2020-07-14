@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 
@@ -6,6 +7,24 @@ namespace Numer0n.Common
 {
     public class Numer0n
     {
+        /// <summary>
+        /// 数字の桁数（デフォルトは4）
+        /// </summary>
+        public static int _maxLength = 4;
+        
+
+        public static void MaxLength(int i)
+        {
+            _maxLength = i;
+        }
+
+        public static int GetMaxLength()
+        {
+            return _maxLength;
+        }
+
+        //この辺ちゃんと書き直したい
+
         /// <summary>
         /// 乱数生成処置
         /// </summary>
@@ -15,15 +34,12 @@ namespace Numer0n.Common
             var rnd = new Random();
             while (true)
             {
-                char[] randomData = {
-                    Convert.ToChar(rnd.Next(10).ToString()),
-                    Convert.ToChar(rnd.Next(10).ToString()),
-                    Convert.ToChar(rnd.Next(10).ToString()),
-                    Convert.ToChar(rnd.Next(10).ToString())
-                };
-                if (randomData.Distinct().Count() == 4)
+                var randomData = new List<char>();
+                Enumerable.Range(1, _maxLength).ToList().ForEach(_ => { randomData.Add(Convert.ToChar(rnd.Next(10).ToString())); });
+                var rndData = randomData.ToArray();
+                if (rndData.Distinct().Count() == _maxLength)
                 {
-                    return new string(randomData);
+                    return new string(rndData);
                 }
             }
         }
@@ -36,8 +52,9 @@ namespace Numer0n.Common
         /// <returns>bool値</returns>
         public static bool TryValidationInputValue(string inputValue, out char[] validationedValue)
         {
-            if (Regex.IsMatch(inputValue, "^\\d{4}$") &&
-                inputValue.ToString().ToCharArray().Distinct().Count() == 4)
+            var regexString = "^\\d{" + _maxLength + "}$";
+            if (Regex.IsMatch(inputValue, regexString) &&
+                inputValue.ToString().ToCharArray().Distinct().Count() == _maxLength)
             {
                 validationedValue = inputValue.ToString().ToCharArray();
                 return true;
