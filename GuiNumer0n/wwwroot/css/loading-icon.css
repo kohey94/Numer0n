@@ -1,0 +1,105 @@
+﻿.s {
+    display: grid;
+    grid-template-rows: 100px 100px;
+    grid-template-columns: 100px 100px;
+}
+
+.s1 {
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 0 100px 100px;
+    border-color: transparent transparent #000000 transparent;
+    -webkit-animation: s1color 0.6s infinite;
+    animation: s1color 0.6s infinite;
+}
+
+@-webkit-keyframes s1color {
+    100% {
+        border-color: transparent transparent #FFFFFF transparent;
+    }
+}
+
+@keyframes s1color {
+    100% {
+        border-color: transparent transparent #FFFFFF transparent;
+    }
+}
+
+.s2 {
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 0 100px 100px;
+    border-color: transparent transparent #000000 transparent;
+    -webkit-animation: s2color 0.6s infinite;
+    animation: s2color 0.6s infinite;
+    animation-delay: 0.15s;
+}
+
+@-webkit-keyframes s2color {
+    100% {
+        border-color: transparent transparent #FFFFFF transparent;
+    }
+}
+
+@keyframes s2color {
+    100% {
+        border-color: transparent transparent #FFFFFF transparent;
+    }
+}
+
+.s3 {
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 0 100px 100px;
+    border-color: transparent transparent #000000 transparent;
+    -webkit-animation: s3color 0.6s infinite;
+    animation: s3color 0.6s infinite;
+    animation-delay: 0.45s;
+}
+
+@-webkit-keyframes s3color {
+    100% {
+        border-color: transparent transparent #FFFFFF transparent;
+    }
+}
+
+@keyframes s3color {
+    100% {
+        border-color: transparent transparent #FFFFFF transparent;
+    }
+}
+
+.s4 {
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 100px 100px 0;
+    border-color: transparent #000000 transparent transparent;
+    -webkit-animation: s4color 0.6s infinite;
+    animation: s4color 0.6s infinite;
+    animation-delay: 0.3s;
+}
+
+@-webkit-keyframes s4color {
+    100% {
+        border-color: transparent #FFFFFF transparent transparent;
+    }
+}
+
+@keyframes s4color {
+    100% {
+        border-color: transparent #FFFFFF transparent transparent;
+    }
+}
+
+.loading-icon {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
