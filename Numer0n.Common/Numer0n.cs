@@ -54,7 +54,7 @@ namespace Numer0n.Common
             }
         }
 
-
+        /// TODO 判定処理の戻り値に正解か不正解かの値を追加したい
         /// <summary>
         /// 判定処理
         /// </summary>

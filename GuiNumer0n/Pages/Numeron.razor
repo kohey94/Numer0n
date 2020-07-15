@@ -1,30 +1,34 @@
 ﻿@page "/numeron"
 
 @using Numer0n.Common;
+@using System.Text.RegularExpressions;
 
 <h3>Numer0n</h3>
 
 @if (@answerNumber == string.Empty)
 {
     <p>no data</p>
-    <Button Color="Color.Danger" @onclick="GetData">スタート</Button>
-
+    <Addons>
+        <Addon AddonType="AddonType.Body">
+            <NumericEdit Placeholder="何桁のNumer0nに挑戦しますか？" TValue="int?" @bind-Value="Digit" />
+        </Addon>
+        <Addon AddonType="AddonType.End">
+            <Button Color="Color.Primary" @onclick="@(e => SetDigits((int)Digit))">挑戦</Button>
+        </Addon>
+    </Addons>
 }
 else
 {
     <p>@answerNumber</p>
     <Addons>
         <Addon AddonType="AddonType.Body">
-            <TextEdit Placeholder="何か入力" @bind-Text="input" />
+            <TextEdit Placeholder="数字を入力してください。" @bind-Text="input" />
         </Addon>
         <Addon AddonType="AddonType.End">
-            <Button Color="Color.Secondary" @onclick="@(e => SetList(input))">Button</Button>
+            <Button Color="Color.Secondary" @onclick="@(e => SetList(input))">判定</Button>
         </Addon>
     </Addons>
-
 }
-
-
 
 <br />
 <Table Bordered="true" Hoverable="true">
@@ -67,6 +71,26 @@ else
 </Modal>
 
 @code {
+    /// <summary>
+    /// 桁数選択
+    /// </summary>
+    private int? Digit { get; set; }
+
+    // TODO どうにかしてplaceholderに文字表示させたままnull非許容にしたい
+    private void SetDigits(int? Digit)
+    {
+
+        if (Regex.IsMatch(Digit.ToString(), "^\\d{1}$"))
+        {
+            Numer0n.MaxLength = (int)Digit;
+            GetData();
+        }
+        else
+        {
+            // TODO バリデーションエラー時の処理
+        }
+    }
+
     private Modal modalRef;
     private bool centered = true;
     private ModalSize modalSize = ModalSize.Small;
@@ -98,7 +122,8 @@ else
             numberHit);
 
         inputList.Add(id);
-        if (placeNumberHit == 4) ShowModal();
+
+        if (placeNumberHit == Numer0n.MaxLength) ShowModal();
     }
 
     protected List<InputNumberHistoryModel> ShowList()
@@ -110,8 +135,12 @@ else
 
     protected void GetData()
     {
+        Digit = null;
+        input = string.Empty;
         InputNumberHistoryModel.ClearCount();
         inputList.Clear();
         answerNumber = Numer0n.GenerateRandomData();
     }
+
+
 }
