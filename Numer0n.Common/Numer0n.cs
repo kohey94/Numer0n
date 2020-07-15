@@ -10,20 +10,7 @@ namespace Numer0n.Common
         /// <summary>
         /// 数字の桁数（デフォルトは4）
         /// </summary>
-        public static int _maxLength = 4;
-        
-
-        public static void MaxLength(int i)
-        {
-            _maxLength = i;
-        }
-
-        public static int GetMaxLength()
-        {
-            return _maxLength;
-        }
-
-        //この辺ちゃんと書き直したい
+        public static int MaxLength { get; set; } = 4;
 
         /// <summary>
         /// 乱数生成処置
@@ -35,9 +22,10 @@ namespace Numer0n.Common
             while (true)
             {
                 var randomData = new List<char>();
-                Enumerable.Range(1, _maxLength).ToList().ForEach(_ => { randomData.Add(Convert.ToChar(rnd.Next(10).ToString())); });
+                Enumerable.Range(1, MaxLength).ToList()
+                    .ForEach(_ => { randomData.Add(Convert.ToChar(rnd.Next(10).ToString())); });
                 var rndData = randomData.ToArray();
-                if (rndData.Distinct().Count() == _maxLength)
+                if (rndData.Distinct().Count() == MaxLength)
                 {
                     return new string(rndData);
                 }
@@ -52,9 +40,9 @@ namespace Numer0n.Common
         /// <returns>bool値</returns>
         public static bool TryValidationInputValue(string inputValue, out char[] validationedValue)
         {
-            var regexString = "^\\d{" + _maxLength + "}$";
+            var regexString = "^\\d{" + MaxLength + "}$";
             if (Regex.IsMatch(inputValue, regexString) &&
-                inputValue.ToString().ToCharArray().Distinct().Count() == _maxLength)
+                inputValue.ToString().ToCharArray().Distinct().Count() == MaxLength)
             {
                 validationedValue = inputValue.ToString().ToCharArray();
                 return true;

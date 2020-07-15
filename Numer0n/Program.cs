@@ -16,10 +16,8 @@ namespace CuiNumer0n
 
             SelectNumberOfDigits(player1Name);
 
-
-
             var enemyData = GenerateRandomData();
-            WriteLine($"チートだよ 対戦相手の数字:{new string(enemyData)}");
+            //WriteLine($"チートだよ 対戦相手の数字:{new string(enemyData)}");
 
             WriteLine("Numer0n Start!!");
 
@@ -32,7 +30,7 @@ namespace CuiNumer0n
                 PlayerHistoryList.Add(new InputNumberHistoryModel(new string(inputNumber), placeNumberHit, numberHit));
 
                 DisplayInputNumberHistory(PlayerHistoryList);
-                if (placeNumberHit == _maxLength)
+                if (placeNumberHit == MaxLength)
                 {
                     WriteLine($"対戦相手の数字は{new string(inputNumber)}でした。");
                     WriteLine($"{player1Name}が勝ちました。");
@@ -58,7 +56,7 @@ namespace CuiNumer0n
         {
             while (true)
             {
-                Write($"{currentPlayer}, 対戦相手の数字を重複なしの{_maxLength}桁で入力してください。:");
+                Write($"{currentPlayer}, 対戦相手の数字を重複なしの{MaxLength}桁で入力してください。:");
                 var p1Input = ReadLine();
                 if (TryValidationInputValue(p1Input, out char[] validationedValue))
                 {
@@ -66,7 +64,7 @@ namespace CuiNumer0n
                 }
                 else
                 {
-                    WriteLine($"重複なしの{_maxLength}桁の数字ではありません。");
+                    WriteLine($"重複なしの{MaxLength}桁の数字ではありません。");
                 }
             }
         }
@@ -79,7 +77,7 @@ namespace CuiNumer0n
                 var p1Input = ReadLine();
                 if (Regex.IsMatch(p1Input, "^\\d{1}$"))
                 {
-                    MaxLength(int.Parse(p1Input));
+                    MaxLength = int.Parse(p1Input);
                     break;
                 }
                 else
