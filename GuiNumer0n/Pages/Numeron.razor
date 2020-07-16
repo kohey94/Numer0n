@@ -5,27 +5,41 @@
 
 <h3>Numer0n</h3>
 
-@if (@answerNumber == string.Empty)
+<Switch TValue="bool" @bind-Checked="@isCheat">チート</Switch>
+@code{
+    bool isCheat;
+}
+@if (isCheat)
 {
-    <p>no data</p>
-    <Addons>
-        <Addon AddonType="AddonType.Body">
-            <NumericEdit Placeholder="何桁のNumer0nに挑戦しますか？" TValue="int?" @bind-Value="Digit" />
-        </Addon>
-        <Addon AddonType="AddonType.End">
-            <Button Color="Color.Primary" @onclick="@(e => SetDigits((int)Digit))">挑戦</Button>
-        </Addon>
-    </Addons>
+    <p>@answerNumber</p>
+
 }
 else
 {
-    <p>@answerNumber</p>
+    <p>xxxxx</p>
+}
+
+@if (@isDigitSelect)
+{
+
+    <Addons>
+        <Addon AddonType="AddonType.Body">
+            <NumericEdit Placeholder="何桁のNumer0nに挑戦しますか？" TValue="int?" @bind-Value="Digit"/>
+        </Addon>
+        <Addon AddonType="AddonType.End">
+            <Button Color="Color.Danger" @onclick="@(e => SetDigits((int)Digit))">挑戦</Button>
+        </Addon>
+    </Addons>
+
+}
+else
+{
     <Addons>
         <Addon AddonType="AddonType.Body">
             <TextEdit Placeholder="数字を入力してください。" @bind-Text="input" />
         </Addon>
         <Addon AddonType="AddonType.End">
-            <Button Color="Color.Secondary" @onclick="@(e => SetList(input))">判定</Button>
+            <Button Color="Color.Success" @onclick="@(e => SetList(input))">判定</Button>
         </Addon>
     </Addons>
 }
@@ -62,6 +76,7 @@ else
             <ModalTitle>結果</ModalTitle>
         </ModalHeader>
         <ModalBody MaxHeight="@maxHeight">
+            <Label>正解は @answerNumber でした。 </Label>
             <Label>@inputList.Count 回目で当たりました。 </Label>
         </ModalBody>
         <ModalFooter>
@@ -75,6 +90,14 @@ else
     /// 桁数選択
     /// </summary>
     private int? Digit { get; set; }
+
+
+    /// <summary>
+    /// 入力値
+    /// </summary>
+    private string input = "";
+
+    bool isDigitSelect = true;
 
     // TODO どうにかしてplaceholderに文字表示させたままnull非許容にしたい
     private void SetDigits(int? Digit)
@@ -98,9 +121,8 @@ else
 
     private void ShowModal()
     {
-
+        isDigitSelect = true;
         modalRef.Show();
-        answerNumber = string.Empty;
     }
 
     private void HideModal()
@@ -108,7 +130,7 @@ else
         modalRef.Hide();
     }
 
-    private string input = "";
+
 
     private List<InputNumberHistoryModel> inputList = new List<InputNumberHistoryModel>();
 
@@ -140,6 +162,7 @@ else
         InputNumberHistoryModel.ClearCount();
         inputList.Clear();
         answerNumber = Numer0n.GenerateRandomData();
+        isDigitSelect = false;
     }
 
 
