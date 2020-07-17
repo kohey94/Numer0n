@@ -19,29 +19,55 @@ else
     <p>xxxxx</p>
 }
 
+
+
 @if (@isDigitSelect)
 {
-
-    <Addons>
-        <Addon AddonType="AddonType.Body">
-            <NumericEdit Placeholder="何桁のNumer0nに挑戦しますか？" TValue="int?" @bind-Value="Digit"/>
-        </Addon>
-        <Addon AddonType="AddonType.End">
+    <Row>
+        <Column ColumnSize="ColumnSize.IsFull">
+            何桁のNumer0nに挑戦しますか？
+        </Column>
+    </Row>
+    <Row>
+        <Validations ValidateOnLoad="false">
+            <Validation UsePattern="true">
+                <Column ColumnSize="ColumnSize.Is9">
+                    <NumericEdit Pattern="^[1-9]{1}$" TValue="int?" @bind-Value="Digit">
+                        <Feedback>
+                            <ValidationError>1桁の数字を入力してください。</ValidationError>
+                        </Feedback>
+                    </NumericEdit>
+                </Column>
+            </Validation>
+        </Validations>
+        <Column ColumnSize="ColumnSize.Is3">
             <Button Color="Color.Danger" @onclick="@(e => SetDigits((int)Digit))">挑戦</Button>
-        </Addon>
-    </Addons>
-
+        </Column>
+    </Row>
 }
 else
 {
-    <Addons>
-        <Addon AddonType="AddonType.Body">
-            <TextEdit Placeholder="数字を入力してください。" @bind-Text="input" />
-        </Addon>
-        <Addon AddonType="AddonType.End">
+    <Row>
+        <Column ColumnSize="ColumnSize.IsFull">
+            数字を入力してください。
+        </Column>
+    </Row>
+    <Row>
+        <Validations ValidateOnLoad="false">
+            <Validation UsePattern="true">
+                <Column ColumnSize="ColumnSize.Is9">
+                    <TextEdit Pattern="@seikihyogen" @bind-Text="input">
+                        <Feedback>
+                            <ValidationError>@Digit 桁の数字を入力してください。</ValidationError>
+                        </Feedback>
+                    </TextEdit>
+                </Column>
+            </Validation>
+        </Validations>
+        <Column ColumnSize="ColumnSize.Is3">
             <Button Color="Color.Success" @onclick="@(e => SetList(input))">判定</Button>
-        </Addon>
-    </Addons>
+        </Column>
+    </Row>
 }
 
 <br />
@@ -91,6 +117,7 @@ else
     /// </summary>
     private int? Digit { get; set; }
 
+    private string seikihyogen { get; set; } = "^[0-9]{4}$";
 
     /// <summary>
     /// 入力値
@@ -103,9 +130,10 @@ else
     private void SetDigits(int? Digit)
     {
 
-        if (Regex.IsMatch(Digit.ToString(), "^\\d{1}$"))
+        if (Regex.IsMatch(Digit.ToString(), "^[1-9]$"))
         {
             Numer0n.MaxLength = (int)Digit;
+            seikihyogen = "^[0-9]{" + Digit + "}$";
             GetData();
         }
         else
