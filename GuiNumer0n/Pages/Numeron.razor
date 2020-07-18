@@ -6,9 +6,6 @@
 <h3>Numer0n</h3>
 
 <Switch TValue="bool" @bind-Checked="@isCheat">チート</Switch>
-@code{
-    bool isCheat;
-}
 @if (isCheat)
 {
     <p>@answerNumber</p>
@@ -18,8 +15,9 @@ else
 {
     <p>xxxxx</p>
 }
-
-
+@code{
+    bool isCheat = false;
+}
 
 @if (@isDigitSelect)
 {
@@ -56,7 +54,7 @@ else
         <Validations ValidateOnLoad="false">
             <Validation UsePattern="true">
                 <Column ColumnSize="ColumnSize.Is9">
-                    <TextEdit Pattern="@seikihyogen" @bind-Text="input">
+                    <TextEdit Pattern="@RegexString" @bind-Text="input">
                         <Feedback>
                             <ValidationError>@Digit 桁の数字を入力してください。</ValidationError>
                         </Feedback>
@@ -117,7 +115,7 @@ else
     /// </summary>
     private int? Digit { get; set; }
 
-    private string seikihyogen { get; set; } = "^[0-9]{4}$";
+    private string RegexString { get; set; } = "^[0-9]{4}$";
 
     /// <summary>
     /// 入力値
@@ -133,7 +131,7 @@ else
         if (Regex.IsMatch(Digit.ToString(), "^[1-9]$"))
         {
             Numer0n.MaxLength = (int)Digit;
-            seikihyogen = "^[0-9]{" + Digit + "}$";
+            RegexString = "^[0-9]{" + Digit + "}$";
             GetData();
         }
         else
@@ -173,7 +171,11 @@ else
 
         inputList.Add(id);
 
-        if (placeNumberHit == Numer0n.MaxLength) ShowModal();
+        if (placeNumberHit == Numer0n.MaxLength)
+        {
+            Digit = null;
+            ShowModal();
+        }
     }
 
     protected List<InputNumberHistoryModel> ShowList()
@@ -185,7 +187,7 @@ else
 
     protected void GetData()
     {
-        Digit = null;
+
         input = string.Empty;
         InputNumberHistoryModel.ClearCount();
         inputList.Clear();
