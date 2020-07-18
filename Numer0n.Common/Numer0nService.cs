@@ -8,7 +8,7 @@ namespace Numer0n.Common
     /// <summary>
     /// Numer0n.csをリファクタリングしたクラス
     /// </summary>
-    public class Numer0nLogic
+    public class Numer0nService : INumer0nService
     {
         /// <summary>
         /// 数字の桁数（デフォルトは4）
@@ -20,7 +20,7 @@ namespace Numer0n.Common
         /// インスタンス生成時に桁数を決める
         /// </summary>
         /// <param name="digit"></param>
-        public Numer0nLogic(int digit = 4)
+        public Numer0nService(int digit = 4)
         {
             Numer0nDigit = digit;
         }

@@ -6,6 +6,7 @@ using Blazorise.Bootstrap;
 using Blazorise.Icons.FontAwesome;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.DependencyInjection;
+using Numer0n.Common;
 
 namespace GuiNumer0n
 {
@@ -21,7 +22,7 @@ namespace GuiNumer0n
             })
                 .AddBootstrapProviders()
                 .AddFontAwesomeIcons();
-
+            builder.Services.AddSingleton<INumer0nService, Numer0nService>();
             builder.Services.AddSingleton(new HttpClient
             {
                 BaseAddress = new Uri(builder.HostEnvironment.BaseAddress)
