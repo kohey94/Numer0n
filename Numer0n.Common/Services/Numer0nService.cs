@@ -13,7 +13,7 @@ namespace Numer0n.Common.Services
         /// <summary>
         /// 数字の桁数（デフォルトは4）
         /// </summary>
-        public static int Numer0nDigit { get; set; } = 4;
+        public int Numer0nDigit { get; set; } = 4;
 
         /// <summary>
         /// コンストラクタ

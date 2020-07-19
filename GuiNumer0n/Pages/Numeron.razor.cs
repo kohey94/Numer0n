@@ -71,6 +71,7 @@ namespace GuiNumer0n.Pages
             
         }
 
+        // TODO SetNumberもサービスクラスで定義したい
         private void SetNumber(string inputValue)
         {
             if (Numer0nService.TryValidationInputValue(inputValue, out char[] validationedValue))
