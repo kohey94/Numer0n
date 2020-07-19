@@ -27,7 +27,7 @@ else
         <Validations ValidateOnLoad="false">
             <Validation UsePattern="true">
                 <Column ColumnSize="ColumnSize.Is9">
-                    <NumericEdit Pattern="^[1-9]{1}$" TValue="int?" @bind-Value="Digit">
+                    <NumericEdit Size="Size.Small" Pattern="^[1-9]{1}$" TValue="int?" @bind-Value="Digit">
                         <Feedback>
                             <ValidationError>1桁の数字を入力してください。</ValidationError>
                         </Feedback>
@@ -36,7 +36,7 @@ else
             </Validation>
         </Validations>
         <Column ColumnSize="ColumnSize.Is3">
-            <Button Color="Color.Danger" @onclick="@(e => SetNumer0nDigit((int)Digit))">挑戦</Button>
+            <Button Size="ButtonSize.Small" Color="Color.Danger" @onclick="@(e => SetNumer0nDigit((int)Digit))">挑戦</Button>
         </Column>
     </Row>
 }
@@ -51,7 +51,7 @@ else
         <Validations ValidateOnLoad="false">
             <Validation UsePattern="true">
                 <Column ColumnSize="ColumnSize.Is9">
-                    <TextEdit Pattern="@RegexString" @bind-Text="Input">
+                    <TextEdit Size="Size.Small" Pattern="@RegexString" @bind-Text="Input">
                         <Feedback>
                             <ValidationError>@Digit 桁の数字を入力してください。</ValidationError>
                         </Feedback>
@@ -60,7 +60,7 @@ else
             </Validation>
         </Validations>
         <Column ColumnSize="ColumnSize.Is3">
-            <Button Color="Color.Success" @onclick="@(e => SetNumber(Input))">判定</Button>
+            <Button Size="ButtonSize.Small" Color="Color.Success" @onclick="@(e => SetNumber(Input))">判定</Button>
         </Column>
     </Row>
 }
