@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Numer0n.Common
+﻿namespace Numer0n.Common.Services
 {
     public interface INumer0nService
     {

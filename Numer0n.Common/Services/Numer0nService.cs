@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 
-namespace Numer0n.Common
+namespace Numer0n.Common.Services
 {
     /// <summary>
     /// Numer0n.csをリファクタリングしたクラス

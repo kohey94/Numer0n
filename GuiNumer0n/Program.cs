@@ -6,7 +6,7 @@ using Blazorise.Bootstrap;
 using Blazorise.Icons.FontAwesome;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.DependencyInjection;
-using Numer0n.Common;
+using Numer0n.Common.Services;
 
 namespace GuiNumer0n
 {
