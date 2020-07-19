@@ -1,8 +1,7 @@
-﻿namespace Numer0n.Common
+﻿namespace Numer0n.Common.Models
 {
     public class InputNumberHistoryModel
     {
-
         public InputNumberHistoryModel(
             string inputNumber,
             int placeNumberHit,

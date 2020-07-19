@@ -2,6 +2,7 @@
 using System.Text.RegularExpressions;
 using Microsoft.AspNetCore.Components;
 using Numer0n.Common;
+using Numer0n.Common.Models;
 
 namespace GuiNumer0n.Pages
 {
@@ -12,7 +13,7 @@ namespace GuiNumer0n.Pages
         private INumer0nService Numer0nService { get; set; }
 
         /// <summary>
-        /// 桁数選択
+        /// Numer0nの桁数桁数
         /// </summary>
         private int? Digit { get; set; }
 
@@ -29,7 +30,10 @@ namespace GuiNumer0n.Pages
 
         string answerNumber = string.Empty;
 
-        bool isDigitSelect = true;
+        /// <summary>
+        /// 入力画面の選択
+        /// </summary>
+        private bool IsDigitSelect { get; set; } = true;
 
         private List<InputNumberHistoryModel> inputList = new List<InputNumberHistoryModel>();
 
@@ -48,6 +52,7 @@ namespace GuiNumer0n.Pages
                 Numer0nService = new Numer0nService((int)Digit);
 
                 RegexString = "^[0-9]{" + Digit + "}$";
+                IsDigitSelect = false;
                 GetNumer0nData();
             }
             else
@@ -63,7 +68,7 @@ namespace GuiNumer0n.Pages
             InputNumberHistoryModel.ClearCount();
             inputList.Clear();
             answerNumber = Numer0nService.GenerateRandomData();
-            isDigitSelect = false;
+            
         }
 
         private void SetNumber(string inputValue)
@@ -83,6 +88,7 @@ namespace GuiNumer0n.Pages
                 if (isCorrect)
                 {
                     Digit = null;
+                    IsDigitSelect = true;
                     ShowModal();
                 }
             }
