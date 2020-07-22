@@ -40,7 +40,7 @@ namespace CuiNumer0n
 
                 WriteLine("Numer0n Start!!");
 
-                var PlayerHistoryList = new List<InputNumberHistoryModel>();
+                var PlayerHistoryList = new List<InputNumberHistoryEntity>();
 
                 while (true)
                 {
@@ -51,13 +51,13 @@ namespace CuiNumer0n
                         (int placeNumberHit, int numberHit, bool isCorrect)
                             = ns.Judgment(validationedValue, enemyData.ToCharArray());
 
-                        PlayerHistoryList.Add(new InputNumberHistoryModel(new string(validationedValue), placeNumberHit, numberHit));
+                        PlayerHistoryList.Add(new InputNumberHistoryEntity(new string(validationedValue), placeNumberHit, numberHit));
                         DisplayInputNumberHistory(PlayerHistoryList);
                         if (isCorrect)
                         {
                             WriteLine($"対戦相手の数字は{new string(validationedValue)}でした。");
                             WriteLine($"{player1Name}が勝ちました。");
-                            InputNumberHistoryModel.ClearCount();
+                            InputNumberHistoryEntity.ClearCount();
                             break;
                         }
                     }

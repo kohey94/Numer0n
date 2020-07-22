@@ -11,7 +11,7 @@ namespace Numer0n.Views
         /// </summary>
         /// <param name="historyList"></param>
 
-        public static void DisplayInputNumberHistory(List<InputNumberHistoryModel> historyList)
+        public static void DisplayInputNumberHistory(List<InputNumberHistoryEntity> historyList)
         {
             WriteLine($"+---------------------------------------------------+");
             WriteLine($"| 回数|     入力値| 場所も数字も当たり| 数字が当たり|");

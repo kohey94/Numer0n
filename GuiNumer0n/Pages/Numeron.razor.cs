@@ -35,14 +35,7 @@ namespace GuiNumer0n.Pages
         /// </summary>
         private bool IsDigitSelect { get; set; } = true;
 
-        private List<InputNumberHistoryModel> inputList = new List<InputNumberHistoryModel>();
-
-        private List<InputNumberHistoryModel> ShowList()
-        {
-            return inputList;
-        }
-
-
+        private List<InputNumberHistoryEntity> inputList = new List<InputNumberHistoryEntity>();
 
         // TODO どうにかしてplaceholderに文字表示させたままnull非許容にしたい
         private void SetNumer0nDigit(int? Digit)
@@ -65,7 +58,7 @@ namespace GuiNumer0n.Pages
         {
 
             Input = string.Empty;
-            InputNumberHistoryModel.ClearCount();
+            InputNumberHistoryEntity.ClearCount();
             inputList.Clear();
             answerNumber = Numer0nService.GenerateRandomData();
             
@@ -79,7 +72,7 @@ namespace GuiNumer0n.Pages
                 (int placeNumberHit, int numberHit, bool isCorrect)
                     = Numer0nService.Judgment(validationedValue, answerNumber.ToCharArray());
 
-                var id = new InputNumberHistoryModel(
+                var id = new InputNumberHistoryEntity(
                     inputValue,
                     placeNumberHit,
                     numberHit);
