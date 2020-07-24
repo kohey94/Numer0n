@@ -2,8 +2,8 @@
 
 <h3>Numer0n</h3>
 
-<Switch TValue="bool" @bind-Checked="@isCheat">チート</Switch>
-@if (isCheat)
+<Switch TValue="bool" @bind-Checked="@IsCheat">チート</Switch>
+@if (IsCheat)
 {
     <p>@answerNumber</p>
 
@@ -11,9 +11,6 @@
 else
 {
     <p>xxxxx</p>
-}
-@code{
-    bool isCheat = false;
 }
 
 @if (@IsDigitSelect)

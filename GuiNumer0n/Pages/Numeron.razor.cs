@@ -13,6 +13,11 @@ namespace GuiNumer0n.Pages
         private INumer0nService Numer0nService { get; set; }
 
         /// <summary>
+        /// チートボタンの状態
+        /// </summary>
+        private bool IsCheat { get; set; } = false;
+
+        /// <summary>
         /// Numer0nの桁数桁数
         /// </summary>
         private int? Digit { get; set; }
