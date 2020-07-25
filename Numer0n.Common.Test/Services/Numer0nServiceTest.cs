@@ -20,6 +20,7 @@ namespace Numer0nCommonTest.Services
         {
             var numer0nService = new Numer0nService();
             Assert.AreEqual(numer0nService.Numer0nDigit, 4);
+            Assert.AreEqual(numer0nService.InputNumberRegex, "^[0-9]{4}$");
         }
 
         [Test]
@@ -27,6 +28,8 @@ namespace Numer0nCommonTest.Services
         {
             var numer0nService = new Numer0nService(5);
             Assert.AreEqual(numer0nService.Numer0nDigit, 5);
+
+            Assert.AreEqual(numer0nService.InputNumberRegex, "^[0-9]{5}$");
         }
 
 

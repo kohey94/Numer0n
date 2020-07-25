@@ -48,7 +48,7 @@ else
         <Validations ValidateOnLoad="false">
             <Validation UsePattern="true">
                 <Column ColumnSize="ColumnSize.Is9">
-                    <TextEdit Size="Size.Small" Pattern="@RegexString" @bind-Text="Input">
+                    <TextEdit Size="Size.Small" Pattern="@Numer0nService.InputNumberRegex" @bind-Text="Input">
                         <Feedback>
                             <ValidationError>@Digit 桁の数字を入力してください。</ValidationError>
                         </Feedback>

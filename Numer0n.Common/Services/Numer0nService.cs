@@ -10,10 +10,30 @@ namespace Numer0n.Common.Services
     /// </summary>
     public class Numer0nService : INumer0nService
     {
+        
+
         /// <summary>
         /// 数字の桁数（デフォルトは4）
         /// </summary>
         public int Numer0nDigit { get; set; } = 4;
+
+        /// <summary>
+        /// 入力値の正規表現
+        /// </summary>
+        private string _inputNumberRegex;
+
+        public string InputNumberRegex
+        {
+            get
+            {
+                return _inputNumberRegex;
+            }
+
+            set
+            {
+                _inputNumberRegex = "^[0-9]{" + value + "}$";
+            }
+        }
 
         /// <summary>
         /// コンストラクタ
@@ -23,6 +43,7 @@ namespace Numer0n.Common.Services
         public Numer0nService(int digit = 4)
         {
             Numer0nDigit = digit;
+            InputNumberRegex = digit.ToString();
         }
 
         /// <summary>
@@ -53,8 +74,8 @@ namespace Numer0n.Common.Services
         /// <returns>bool値</returns>
         public bool TryValidationInputValue(string inputValue, out char[] validationedValue)
         {
-            var regexString = "^\\d{" + Numer0nDigit + "}$";
-            if (Regex.IsMatch(inputValue, regexString) &&
+            
+            if (Regex.IsMatch(inputValue, InputNumberRegex) &&
                 inputValue.ToString().ToCharArray().Distinct().Count() == Numer0nDigit)
             {
                 validationedValue = inputValue.ToString().ToCharArray();

@@ -18,7 +18,7 @@ namespace GuiNumer0n.Pages
         private bool IsCheat { get; set; } = false;
 
         /// <summary>
-        /// Numer0nの桁数桁数
+        /// Numer0nの桁数
         /// </summary>
         private int? Digit { get; set; }
 
@@ -26,12 +26,6 @@ namespace GuiNumer0n.Pages
         /// 入力値
         /// </summary>
         private string Input { get; set; } = string.Empty;
-
-        /// TODO NUmer0nLogic.cs側に入力値の正規表現の変数持たせてそれを参照するようにしたい
-        /// <summary>
-        /// 入力値の正規表現（初期は4桁）
-        /// </summary>
-        private string RegexString { get; set; } = "^[0-9]{4}$";
 
         string answerNumber = string.Empty;
 
@@ -48,8 +42,6 @@ namespace GuiNumer0n.Pages
             if (Regex.IsMatch(Digit.ToString(), "^[1-9]$"))
             {
                 Numer0nService = new Numer0nService((int)Digit);
-
-                RegexString = "^[0-9]{" + Digit + "}$";
                 IsDigitSelect = false;
                 GetNumer0nData();
             }
@@ -61,12 +53,10 @@ namespace GuiNumer0n.Pages
 
         private void GetNumer0nData()
         {
-
             Input = string.Empty;
             InputNumberHistoryEntity.ClearCount();
             inputList.Clear();
             answerNumber = Numer0nService.GenerateRandomData();
-            
         }
 
         // TODO SetNumberもサービスクラスで定義したい
