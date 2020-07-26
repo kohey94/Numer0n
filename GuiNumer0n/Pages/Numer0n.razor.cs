@@ -6,7 +6,7 @@ using Numer0n.Common.Services;
 
 namespace GuiNumer0n.Pages
 {
-    public partial class Numeron
+    public partial class Numer0n
     {
 
         [Inject]
